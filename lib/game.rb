@@ -58,10 +58,10 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.any? do |combo|
-      if position_taken?(combo[0]) && @board[combo[0]] == @board[combo[1]] && @board[combo[1]] == @board[combo[2]]
-        return combo
-      end
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[1]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0]+1)
     end
   end
 
